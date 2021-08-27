@@ -22,6 +22,7 @@ $station8003 = getJsonFromAPI(8003);
 $station16001 = getJsonFromAPI(16001);
 $station16103 = getJsonFromAPI(16103);
 
+//Récupération de la donnée > récupérer données récupérées
 
 setVelibData($bdd, 17033, $station17033);
 setVelibData($bdd, 8056, $station8056);
@@ -31,10 +32,13 @@ setVelibData($bdd, 8003, $station8003);
 setVelibData($bdd, 16001, $station16001);
 setVelibData($bdd, 16103, $station16103);
 
-//Récupération de la donnée > récupérer données récupérées
-
-
-
+$_station17033 = getOneVelibStationFromBDD($bdd, 17033);
+$_station8056 = getOneVelibStationFromBDD($bdd, 8056);
+$_station8057 = getOneVelibStationFromBDD($bdd, 8057);
+$_station8028 = getOneVelibStationFromBDD($bdd, 8028);
+$_station8003 = getOneVelibStationFromBDD($bdd, 8003);
+$_station16001 = getOneVelibStationFromBDD($bdd, 16001);
+$_station16103 = getOneVelibStationFromBDD($bdd, 16103);
 
 //FONCTIONS
 /*
@@ -52,13 +56,14 @@ function getAllCodeVelibStationFromBDD($pdo){
 }
 
 /*
-    Récupération d'une station de Vélib avec les données de disponnibilités
+    Récupération d'une station de Vélib avec les données de disponibilités
     @pdo object : variable où l'on a initialisé la base de données
 */
-function getOneVelibStationFromBDD($pdo, $codeStation){
-    $requete = "SELECT `code_station`, `nom_station`, `ouvert_dispo`, `evelo_dispo`, `velo_dispo`, `total_dispo`, `capacite_dispo` 
-    FROM stations
-    RIGHT JOIN `dispo` ON stations.code_station = dispo.codeStation_dispo WHERE codeStation_dispo = code_station;";
+    function getOneVelibStationFromBDD($pdo, $codeStation){
+    $requete = "SELECT `code_station`, `nom_station`, `ouvert_dispo`, `evelo_dispo`, `velo_dispo`, `total_dispo`, `capacite_dispo`
+    FROM `stations`
+    RIGHT JOIN `dispo` ON `stations`.`code_station` = `dispo`.`codeStation_dispo` WHERE codeStation_dispo = :codeStation;";
+
     $sql = $pdo->prepare($requete);
     $sql->bindValue(':codeStation', $codeStation, PDO::PARAM_INT);
     $sql->execute();
@@ -87,7 +92,6 @@ function getAllVelibStationFromBDD($pdo, $codeStation){
     @pdo object : variable où l'on a initialisé la base de données
 */
 function setVelibData($pdo, $codeStation, $data){
-
     if(getOneVelibStationFromBDD($pdo, $codeStation)){
         $requeteUpdate = "UPDATE `dispo`
         SET ouvert_dispo = :ouvert_dispo, evelo_dispo = :evelo_dispo, velo_dispo = :velo_dispo, total_dispo = :total_dispo, capacite_dispo = :capacite_dispo 
