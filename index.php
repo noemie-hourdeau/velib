@@ -14,13 +14,13 @@
 <body>
     <div class=container>
         <div class="carte">
-            <div id="vel17033" class="caseVelo"></div>
-            <div id="vel8056" class="caseVelo"></div>
-            <div id="vel8057" class="caseVelo"></div>
-            <div id="vel8028" class="caseVelo"></div>
-            <div id="vel8003" class="caseVelo"></div>
-            <div id="vel16001" class="caseVelo"></div>
-            <div id="vel16103" class="caseVelo"></div>
+            <div id="vel17033" class="caseVelo"><?=$_station17033['total_dispo'];?></div>
+            <div id="vel8056" class="caseVelo"><?=$_station8056['total_dispo'];?></div>
+            <div id="vel8057" class="caseVelo"><?=$_station8057['total_dispo'];?></div>
+            <div id="vel8028" class="caseVelo"><?=$_station8028['total_dispo'];?></div>
+            <div id="vel8003" class="caseVelo"><?=$_station8003['total_dispo'];?></div>
+            <div id="vel16001" class="caseVelo"><?=$_station16001['total_dispo'];?></div>
+            <div id="vel16103" class="caseVelo"><?=$_station16103['total_dispo'];?></div>
         </div>
         <div class="infos" id="infos">
             <div id="infos17033" class="infosVelo">
